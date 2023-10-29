@@ -1,7 +1,7 @@
 # Carregamento do arquivo
 
 def load_list():
-    file = open("GD.txt", "r")
+    file = open("GD1.txt", "r")
     listt = file.readlines()
     for i in range(len(listt)):
         line = listt[i].split()
@@ -10,7 +10,6 @@ def load_list():
             adj_list = [[] for _ in range(N)]
         else:
             adj_list[int(line[0]) - 1].append(int(line[1]) - 1)
-    print(adj_list)
     file.close()
     return adj_list, N
 
