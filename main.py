@@ -15,8 +15,10 @@ def dfs_visit(u):
         elif color[v] == "gray":
             edge_types[(u, v)] = "Retorno"
         else:
-            edge_types[(u, v)] = "Avanco" if d[u] < d[v] else "Cruzamento"
-
+            if d[u] < d[v]:
+                edge_types[(u, v)] = "Avanco"
+            else:
+                edge_types[(u, v)] = "Cruzamento"
     color[u] = "black"
     mark += 1
     f[u] = mark
@@ -28,7 +30,7 @@ def dfs():
             dfs_visit(u)
 
 
-file_name = "G1.txt"
+file_name = "G3.txt"
 adj_list, high_degree, N = load_graph(file_name)
 v = high_degree
 color = ["white"] * N

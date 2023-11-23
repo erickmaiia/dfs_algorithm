@@ -8,6 +8,7 @@ def load_graph(filename):
     exit_degrees = []
     N_VERTEX = int(lines[0].split()[0])
     N_EDGES = int(lines[0].split()[1])
+    ascii_a = ord('a')
     if N_EDGES <= 0:
         print("Grafo vazio")
         return exit(0)
@@ -16,7 +17,8 @@ def load_graph(filename):
     for line in lines[1:]:
         vertex1, vertex2 = line.split()
         if vertex1.isalpha() and vertex2.isalpha():
-            vertex1, vertex2 = ord(vertex1) - ord('a'), ord(vertex2) - ord('a')
+            # Ocorre um erro se o label não estiver em ordem consecutiva
+            vertex1, vertex2 = ord(vertex1) - ascii_a, ord(vertex2) - ascii_a
             exit_degrees.append(vertex1)
             adj_list[vertex1].append(vertex2)
         else:
@@ -25,6 +27,7 @@ def load_graph(filename):
             adj_list[vertex1].append(vertex2)
 
     count_degrees = Counter(exit_degrees)
-    high_degree = [element for element, _ in count_degrees.most_common()]
+    most_count_degree = count_degrees.most_common()
+    high_degree = [element for element, _ in most_count_degree]
 
     return adj_list, high_degree, N_VERTEX
